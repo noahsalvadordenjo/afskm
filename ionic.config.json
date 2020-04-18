@@ -1,0 +1,7 @@
+{
+  "name": "aschadvescher",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
