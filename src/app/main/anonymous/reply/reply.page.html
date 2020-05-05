@@ -1,0 +1,23 @@
+<section class="hero is-fullheight is-dark is-bold">
+  <ion-header>
+    <ion-toolbar>
+      <ion-back-button class="border-back-less" slot="start" defaultHref="/main/anonymous">
+      </ion-back-button>
+      <ion-icon name="person-remove-outline" class="ion-padding" (click)="block()" class="ion-padding" slot="end"></ion-icon>
+    </ion-toolbar>
+  </ion-header>
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <mat-form-field class="full-width">
+        <textarea type="text" 
+        [formControl]="messageFormControl" 
+        [errorStateMatcher]="errorStateMatcher" 
+        [(ngModel)]="text"
+        matInput 
+        placeholder="Message"></textarea>
+        <mat-error *ngIf="messageFormControl.hasError('required')">Message is required</mat-error>
+        <button mat-button (click)="send()" matSuffix>send <div class="spinner-border text-light spinner-border-sm" *ngIf="isFetchReply | async"></div></button>
+      </mat-form-field>
+    </div>
+  </div>
+</section>

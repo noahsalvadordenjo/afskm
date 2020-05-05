@@ -1,20 +1,49 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+<section class="hero is-fullheight is-dark is-bold" #passwordElement @transformFromAboveEnterTrigger *ngIf="isPassword | async">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <app-password></app-password>
+    </div>
   </div>
-</ion-content>
+</section>
+<section class="hero is-fullheight is-bold is-dark" #confirmElement @transformFromAboveEnterTrigger *ngIf="isConfirm | async">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <p class="title" *ngIf="isConfirmText | async" @sizeEnterTrigger>Please confirm your e-mail </p>
+   <div class="spinner-border text-light spinner-border-sm" @sizeEnterTrigger *ngIf="isConfirmText | async" matSuffix></div>
+    </div>
+  </div>
+</section>
+<section class="hero is-fullheight is-dark is-bold" *ngIf="isRegisterClicked | async" @transformFromAboveEnterTrigger #registerElement>
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <app-register></app-register>
+    </div>
+  </div>
+  <div class="hero-foot">
+    <div class="container has-text-centered"><button mat-button (click)="backFromRegister()">back</button></div>
+  </div>
+</section>
+<section class="hero is-fullheight is-dark is-bold" *ngIf="isLoginClicked | async" @transformFromAboveEnterTrigger #loginElement>
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <app-login></app-login>    
+    </div>
+  </div>
+  <div class="hero-foot">
+    <div class="container has-text-centered"><button mat-button (click)="backFromLogin()">back</button></div>
+  </div>
+</section>
+<section #aschadvescher class="hero is-fullheight is-dark is-bold" *ngIf="isHome | async" @transformFromBelowEnterTrigger >
+  <div class="hero-body">
+    <div class="container has-text-centered"><p class="title">
+      Advertiser
+    </p>
+    <button mat-button (click)="onLeft()" ><mat-icon>keyboard_arrow_left</mat-icon></button>
+    <button mat-button [@slideTrigger]="loginState | async" (click)="login()"  *ngIf="isLogin | async">LOGIN</button>
+    <button mat-button [@slideTrigger]="registerState | async" (click)="register()"  *ngIf="isRegister | async">REGISTER</button>
+    <button mat-button (click)="onRight()">
+     <mat-icon>keyboard_arrow_right</mat-icon>
+     </button>
+    </div>
+  </div>
+</section>

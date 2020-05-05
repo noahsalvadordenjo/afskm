@@ -1,0 +1,15 @@
+<section class="hero is-fullheight is-dark is-bold">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <mat-form-field class="full-width" @transformFromBelowEnterTrigger>
+        <input type="text" 
+        [formControl]="emailFormControl"
+        [errorStateMatcher]="errorStateMatcher"
+        placeholder="E-Mail"
+        [(ngModel)]="email" 
+        matInput>
+      <button mat-button matSuffix (click)="submit()">submit <div class="spinner-border text-light spinner-border-sm" *ngIf="isFetch | async"></div></button>
+      </mat-form-field>
+    </div>
+  </div>
+</section>

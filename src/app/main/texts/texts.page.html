@@ -1,0 +1,31 @@
+<section class="hero is-fullheight is-dark is-bold">
+  <ion-list *ngIf="isTexts | async">
+      <ion-item *ngFor="let text of (texts | async)"  @transformFromAboveEnterTrigger routerLink="{{ '/main/texts/text/' + text.reciever }}">
+        <ion-grid>
+          <ion-row>
+            <ion-col class="ion-text-center">
+              <p class="subtitle">
+                {{ text.username }}
+              </p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <table class="full-width">
+              <tr>
+                <td>
+                  <p class="title">
+                    {{ text.texts.txt }}
+                  </p>
+                </td>
+                <td class="ion-text-end">
+                  <p class="subtitle">
+                    {{ text.time.toLocaleTimeString() }}
+                  </p>
+                </td>
+              </tr>
+            </table>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+  </ion-list>
+</section>

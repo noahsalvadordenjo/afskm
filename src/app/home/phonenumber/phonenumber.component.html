@@ -1,0 +1,26 @@
+<mat-form-field class="full-width" @transformFromBelowEnterTrigger *ngIf="isPhonenumberFormField | async">
+  <button mat-button [matMenuTriggerFor]="menu" matPrefix>
+    {{ (selectedPhonenumberPrefix | async)?.code }}
+  </button>
+  <mat-menu #menu="matMenu">
+   <button mat-menu-item *ngFor="let pf of (phonenumberPrefixes | async)" (click)="prefix(pf)">
+     {{ pf.name }}
+   </button>
+  </mat-menu>
+  <input type="text" 
+  [(ngModel)]="phonenumber" 
+  matInput 
+  [formControl]="phonenumberFormControl" 
+  [errorStateMatcher]="errorStateMatcher" 
+  placeholder="Phonenumber"
+  >
+  <mat-error *ngIf="phonenumberFormControl.hasError('required')">
+    Phonenumber is required
+  </mat-error>
+  <mat-error *ngIf="phonenumberFormControl.hasError('backend')">
+    {{ fetchPhonenumberError | async }}
+  </mat-error>
+  <button mat-button (click)="submit()" matSuffix>
+    {{ (isVerificationCode | async) ? 'change' : 'submit' }}
+  </button>
+</mat-form-field>

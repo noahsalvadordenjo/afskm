@@ -1,0 +1,15 @@
+<section class="hero is-fullheight is-bold is-dark">
+  <div class="hero-head">
+    <div class="container has-text-centered">
+      <p class="title" style="padding-top: 8px;">BTM</p>
+      <img src="{{ 'http://localhost:5000/image/qr/' + (atm | async) }}" (click)="copy()" width="50%"/>    
+    </div>
+  </div>
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <mat-form-field class="full-width" @transformFromBelowEnterTrigger ><input type="text" matInput placeholder="Username" [(ngModel)]="username" >
+        <button mat-button (click)="change()" matSuffix>change <div class="spinner-border text-light spinner-border-sm" *ngIf="(isFetchUsername | async) || (isUsername | async)"></div></button>
+      </mat-form-field>
+    </div>
+    </div>
+</section>

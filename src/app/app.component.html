@@ -1,3 +1,5 @@
-<ion-app>
-  <ion-router-outlet></ion-router-outlet>
-</ion-app>
+<section class="hero is-fullheight is-dark is-bold" [@opacityStateTrigger]="state | async">
+  <ion-app [@opacityStateTrigger]="state | async">
+    <ion-router-outlet></ion-router-outlet>
+  </ion-app>
+</section>

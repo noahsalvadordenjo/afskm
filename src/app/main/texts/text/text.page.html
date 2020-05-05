@@ -1,0 +1,55 @@
+<section class="hero is-fullheight is-dark is-bold">
+  <ion-header>
+    <ion-toolbar>
+      <ion-back-button slot="start" defaultHref="/main/texts" style="background-color: transparent; border-color: transparent;"></ion-back-button>
+      <ion-title>
+        {{ username | async }}
+      </ion-title>
+      <ion-icon *ngIf="!(isBlocked | async)" name="person-remove-outline" class="ion-padding" (click)="block()" slot="end"></ion-icon>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list style="scroll-margin-bottom: 0; scroll-margin-top: auto;">
+      <ion-item *ngFor="let text of (texts | async)" @transformFromAboveEnterTrigger>
+          <ion-grid>
+            <ion-row>
+              <ion-col class="ion-text-start" *ngIf="text.isIncoming">
+                <p class="subtitle">
+                  {{ text.txt }}
+                </p>
+              </ion-col>
+              <ion-col class="ion-text-end" *ngIf="text.isIncoming">
+                <p class="subtitle">
+                  {{ text.date.toLocaleTimeString()}}
+                </p>
+              </ion-col>
+              <ion-col class="ion-text-start" *ngIf="!text.isIncoming">
+                <p class="subtitle">
+                  {{ text.date.toLocaleTimeString() }}
+                </p>
+              </ion-col>
+              <ion-col class="ion-text-end" *ngIf="!text.isIncoming">
+                <p class="subtitle">
+                  {{ text.txt }}
+                </p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+
+  <ion-footer style="padding-bottom: 60px;" class="ion-padding">
+    <ion-item @transformFromBelowEnterTrigger>
+      <ion-label><p class="title">Anonymous</p></ion-label>
+      <ion-toggle color="dark" [(ngModel)]="anonymous"></ion-toggle>
+    </ion-item>
+    <mat-form-field class="full-width" @transformFromBelowEnterTrigger>
+      <textarea type="text" [formControl]="textFormControl" [errorStateMatcher]="errorStateMatcher" [(ngModel)]="text" placeholder="Message" matInput></textarea>
+      <button mat-button matSuffix (click)="send()">send <div class="spinner-border text-light spinner-border-sm" *ngIf="isFetchText | async"></div></button>
+      <mat-error *ngIf="textFormControl.hasError('backend')">
+        {{ fetchTextError | async }}
+      </mat-error>  
+    </mat-form-field>
+  </ion-footer>
+</section>

@@ -1,0 +1,10 @@
+<div style="overflow:hidden">
+  <mat-form-field class="full-width" *ngIf="isVerificationCode | async" @transformFromAboveEnterTrigger >
+    <input type="text" [formControl]="verificationCodeFormControl" [errorStateMatcher]="errorStateMatcher" [(ngModel)]="verification" matInput placeholder="Verification code">
+    <mat-error *ngIf="verificationCodeFormControl.hasError('required')">Verification code is required</mat-error>
+    <mat-error *ngIf="verificationCodeFormControl.hasError('backend')">
+      {{ fetchVerificationCodeError | async }}
+    </mat-error>
+    <button mat-button matSuffix (click)="submit()">submit</button>
+  </mat-form-field>
+</div>

@@ -1,0 +1,18 @@
+<mat-form-field class="full-width" @transformFromBelowEnterTrigger *ngIf="isEmailFormField | async">
+  <input matInput 
+  placeholder="E-Mail" 
+  [formControl]="emailFormControl" 
+  [errorStateMatcher]="errorStateMatcher" 
+  [(ngModel)]="email"
+  >
+  <mat-error *ngIf="emailFormControl.hasError('required')">
+    e-mail is required
+  </mat-error>
+  <mat-error *ngIf="emailFormControl.hasError('backend')">
+    {{ fetchMailError | async}}
+  </mat-error>
+  <mat-error *ngIf="emailFormControl.hasError('email')">
+  invalid e-mail
+  </mat-error>
+  <button mat-button matSuffix (click)="submit()">submit <div class="spinner-border text-light spinner-border-sm" *ngIf="isFetchMail | async"></div></button>
+</mat-form-field>

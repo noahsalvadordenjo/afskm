@@ -1,0 +1,15 @@
+<section class="hero is-fullheight is-dark is-bold">
+    <ion-list>
+      <ion-item *ngFor="let text of (texts | async)" class="has-text-centered" routerLink="{{ '/main/anonymous/reply/' + text.index }}" @transformFromAboveEnterTrigger>
+        <ion-grid>
+          <ion-row>
+            <ion-col class="has-text-centered">
+              <p class="title">
+                  {{ text.txt }}
+                </p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>  
+      </ion-item>
+    </ion-list>
+</section>

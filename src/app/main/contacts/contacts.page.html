@@ -1,0 +1,18 @@
+<section class="hero is-fullheight is-dark is-bold">
+  <div class="hero-head">
+    <ion-searchbar style="color:white" *ngIf="isContacts | async" value="{{ address }}" placeholder="Search or insert address" (ionChange)="search($event)" @transformFromAboveEnterTrigger></ion-searchbar>
+    <div class="container has-text-centered">
+      <button mat-button (click)="scan()">scan</button>
+    </div>
+  </div>
+
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <ion-list *ngIf="isContacts | async">
+        <ion-item *ngFor="let contact of (contacts | async)" routerLink="{{ '/main/texts/text/' + contact.address }}" @transformFromAboveEnterTrigger >
+          <p class="title">{{ contact.username }}</p>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+</section>
